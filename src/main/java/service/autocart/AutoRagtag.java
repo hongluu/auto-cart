@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.http.NameValuePair;
@@ -18,6 +19,11 @@ import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import context.ShareContext;
 import entities.Brand;
@@ -44,7 +50,20 @@ public class AutoRagtag {
 	public void setTransantionId(String transantionId) {
 		this.transantionId = transantionId;
 	}
-
+	public void setTransactionIdAndCookie(){
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("http://www.ragtag.jp");
+		WebElement transactionEl = driver.findElement(By.xpath("//*[@id='header_login_form']/input[2]"));
+		transantionId = transactionEl.getAttribute("value");
+		
+		StringBuilder cookieBuilder = new StringBuilder(); 
+		Set<Cookie> cookies = driver.manage().getCookies();
+		cookies.forEach(a->{
+			cookieBuilder.append(a.getName()+"="+a.getValue()+";");
+		 });
+		cookie= cookieBuilder.toString();
+	}
 	public LinkedHashMap<String, ArrayList<Brand>> getAllBrandMap() {
 		try {
 			LinkedHashMap<String, ArrayList<Brand>> ret = new LinkedHashMap<String, ArrayList<Brand>>();
@@ -82,23 +101,25 @@ public class AutoRagtag {
 		if(selectedBrands ==null || selectedBrands.size() ==0){
 			return;
 		}
-		AutoRagtag.logger.info("Start1 ...");
 		this.ragCrawler = new RagtagCrawler();
-		AutoRagtag.logger.info("Start ...");
+		
 		List<String> brandNames = selectedBrands.stream().map(x-> x.getBrandName()).collect(Collectors.toList());
 		// uncomment to test
-//		ShareContext.setAddedLinkProducts(new ArrayList<>());
+		//ShareContext.setAddedLinkProducts(new ArrayList<>());
 		while (!isExit) {
+			mainSettingDialog.appendLog("Start find products");
 			List<ItemRagtag> allItemsRagtag = ragCrawler.getProductToAddCart(brandNames, this.transantionId);
+			
+			
 			if(allItemsRagtag!= null){
-				mainSettingDialog.appendLog("FOUNDED "+allItemsRagtag.size()+" NEW PRODUCTS");
+				mainSettingDialog.appendLog("Found " +allItemsRagtag.size()+ " products");
 				for (ItemRagtag itemRagtag : allItemsRagtag) {
 					this.addCart(itemRagtag);
 					mainSettingDialog.appendLog("Add products : "+itemRagtag.getProductCode());
 				}
 				mainSettingDialog.appendLog("COMPLETE STEP !!!");
 			}else{
-				mainSettingDialog.appendLog("FOUND 0 NEW PRODUCTS !");
+				mainSettingDialog.appendLog("No news products !!!");
 			}
 		}
 	}

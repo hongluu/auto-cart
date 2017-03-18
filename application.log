@@ -203,3 +203,38 @@
 2017-03-18 14:50:48 INFO  BaseCrawler:36 - End find link!
 2017-03-18 14:50:48 INFO  BaseCrawler:39 - No products to add cart !
 2017-03-18 14:50:48 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 16:34:16 INFO  AutoRagtag:104 - Start1 ...
+2017-03-18 16:34:23 INFO  AutoRagtag:106 - Start ...
+2017-03-18 16:34:23 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 16:36:31 INFO  BaseCrawler:36 - End find link!
+2017-03-18 16:36:31 INFO  BaseCrawler:42 - FOUND 76 NEW PRODUCTS
+2017-03-18 16:36:36 INFO  AutoRagtag:141 - Add product :2101901597700
+2017-03-18 16:36:38 INFO  AutoRagtag:141 - Add product :2102400890934
+2017-03-18 16:36:40 INFO  AutoRagtag:141 - Add product :2102400883509
+2017-03-18 16:36:46 INFO  AutoRagtag:141 - Add product :2102600092596
+2017-03-18 16:36:49 INFO  AutoRagtag:141 - Add product :2160028819799
+2017-03-18 16:36:55 INFO  AutoRagtag:141 - Add product :2100330246500
+2017-03-18 16:36:59 INFO  AutoRagtag:141 - Add product :2160028401772
+2017-03-18 16:37:03 INFO  AutoRagtag:141 - Add product :2100915171906
+2017-03-18 16:37:08 INFO  AutoRagtag:141 - Add product :2100330186158
+2017-03-18 16:37:13 INFO  AutoRagtag:141 - Add product :2100330236105
+2017-03-18 16:37:18 INFO  AutoRagtag:141 - Add product :2100722185264
+2017-03-18 16:37:24 INFO  AutoRagtag:141 - Add product :2102500712839
+2017-03-18 16:37:30 INFO  AutoRagtag:141 - Add product :2100330234828
+2017-03-18 16:45:15 INFO  AutoRagtag:110 - Start find products
+2017-03-18 16:45:15 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 16:45:22 INFO  BaseCrawler:36 - End find link!
+2017-03-18 16:45:22 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 16:48:53 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 16:50:55 INFO  BaseCrawler:36 - End find link!
+2017-03-18 16:50:55 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 16:50:55 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 16:51:05 INFO  BaseCrawler:36 - End find link!
+2017-03-18 16:51:05 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 16:51:05 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 16:51:15 INFO  BaseCrawler:36 - End find link!
+2017-03-18 16:51:15 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 16:51:15 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 16:51:24 INFO  BaseCrawler:36 - End find link!
+2017-03-18 16:51:24 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 16:51:24 INFO  BaseCrawler:34 - Start find link!

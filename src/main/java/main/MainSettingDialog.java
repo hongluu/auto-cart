@@ -46,12 +46,9 @@ public class MainSettingDialog extends JFrame{
 	private static final long serialVersionUID = 6445315957007559638L;
 	private JTextField textField;
 	private JList<String> alphaList;
-	private JTextArea cookieArea;
 	private JTextArea logArea;
 	private boolean running = false;
 	int count = 0;
-	private JTextField transactionTextField;
-	private JTextField cookieTextField;
 //	AutoAddCart autoCart = new AutoAddCart(this);
 	public void appendLog(String text){
 		logArea.append(text);
@@ -62,17 +59,16 @@ public class MainSettingDialog extends JFrame{
 	}
 	
 	public MainSettingDialog(){
+		
+		
 		AutoRagtag auto = new AutoRagtag(this);
+		auto.setTransactionIdAndCookie();
+		
 		setTitle("カートイン- Ragtag");
 		getContentPane().setLayout(null);
 		setResizable(false);
 		setIconImage(new ImageIcon("./icon.png").getImage());
 		
-//		List<Brand> brands = auto.getAllBrand();	
-//		List<Brand> brands = new ArrayList<Brand>();
-//		brands.add(new Brand("A", "Code A"));
-//		Map<String, String> mapBrand = getMapBrand(brands);
-//		String [] brandArr = getBrandArr(brands);
 		final JLabel lblNewLabel = new JLabel("<html>ブランド<br>（複数選択可）");
 		lblNewLabel.setBounds(12, 10, 95, 33);
 		getContentPane().add(lblNewLabel);
@@ -138,17 +134,6 @@ public class MainSettingDialog extends JFrame{
 							return;
 						}
 
-						auto.setCookie(cookieTextField.getText()); 
-								
-						auto.setTransantionId(transactionTextField.getText());
-						if (auto.getCookie() == null || auto.getCookie().isEmpty()){
-							JOptionPane.showMessageDialog(null, "ブラウザからクッキーをクッキー欄にコピペしてください。そのあと設定保存すると、次回このステップが不要となります。");
-							return;
-						}
-						if (auto.getTransantionId() == null || auto.getTransantionId().isEmpty()){
-							JOptionPane.showMessageDialog(null, "サイトで任意のカテゴリを選択し検索して、ブラウザのURL欄の「 transantionId」キーの値をトランザクション欄に コピペしてください。");
-							return;
-						}
 						btnNewButton.setText("実行中...");
 						btnNewButton.setEnabled(false);
 						String brandString = "<html>このブランドの新規出品商品をカートに入れる。<br>";
@@ -198,7 +183,6 @@ public class MainSettingDialog extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Properties pros = new Properties();
-				pros.setProperty("cookie", cookieTextField.getText());
 				try {
 					pros.store(new FileWriter(new File("./setting.properties")),"");
 				} catch (IOException e1) {
@@ -211,40 +195,6 @@ public class MainSettingDialog extends JFrame{
 		btnSaveSetting.setBounds(431, 471, 112, 21);
 		getContentPane().add(btnSaveSetting);
 		
-		transactionTextField = new JTextField();
-		String tranID = auto.getTransantionId();
-		if (tranID != null && !tranID.isEmpty()){
-			transactionTextField.setText(tranID);
-		}
-		else{
-			transactionTextField.setText("サイトで任意のカテゴリを選択し検索して、ブラウザのURL欄の「 transantionId」キーの値を コピペしてください。");
-		}
-		transactionTextField.setBounds(119, 180, 538, 19);
-		getContentPane().add(transactionTextField);
-		transactionTextField.setColumns(10);
-		
-		JLabel lblTransaction = new JLabel("トランザクション");
-		lblTransaction.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTransaction.setBounds(12, 173, 104, 33);
-		getContentPane().add(lblTransaction);
-		
-		JLabel lblCookie = new JLabel("クッキー");
-		lblCookie.setBounds(12, 209, 95, 33);
-		getContentPane().add(lblCookie);
-		
-		cookieTextField = new JTextField();
-		cookieTextField.setColumns(10);
-		cookieTextField.setBounds(119, 216, 538, 19);
-		Properties pros = new Properties();
-		
-		try {
-			pros.load(new FileReader(new File("./setting.properties")));
-			cookieTextField.setText(pros.getProperty("cookie"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		getContentPane().add(cookieTextField);
 		
 		JLabel label = new JLabel("    >>");
 		label.setBounds(274, 87, 50, 13);
@@ -321,13 +271,7 @@ public class MainSettingDialog extends JFrame{
 		this.textField = textField;
 	}
 
-	public JTextArea getCookieArea() {
-		return cookieArea;
-	}
 
-	public void setCookieArea(JTextArea cookieArea) {
-		this.cookieArea = cookieArea;
-	}
 
 	public boolean isRunning() {
 		return running;

@@ -6,6 +6,7 @@ public class ItemRagtag extends BaseItem {
 	private String productClassId;
 	private int quantity;
 	private String transactionid;
+	private String productName;
 
 	public ItemRagtag() {
 		this.quantity = 1;
@@ -49,6 +50,14 @@ public class ItemRagtag extends BaseItem {
 
 	public void setTransactionid(String transactionid) {
 		this.transactionid = transactionid;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 }
