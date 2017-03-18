@@ -33,7 +33,7 @@ public abstract class BaseCrawler {
     private WebDriver mDriver                      = null;
     private boolean mAutoQuitDriver                = true;
 
-    private static final String CONFIG_FILE        = "config.ini";
+    private static final String CONFIG_FILE        = "./config.ini";
     private static final String DRIVER_FIREFOX     = "firefox";
     private static final String DRIVER_CHROME      = "chrome";
     private static final String DRIVER_PHANTOMJS   = "phantomjs";
@@ -55,7 +55,7 @@ public abstract class BaseCrawler {
     public void configure() throws IOException {
         // Read config file
         sConfig = new Properties();
-        sConfig.load(new FileReader(BaseCrawler.class.getClassLoader().getResource(CONFIG_FILE).getFile()));
+        sConfig.load(new FileReader(CONFIG_FILE));
 
         // Prepare capabilities
         sCaps = new DesiredCapabilities();

@@ -28,8 +28,8 @@ import service.crawler.RagtagCrawler;
 
 public class AutoRagtag {
 
-	private  String cookie = "cookie";
-	private String transantionId ="trans";
+	private  String cookie = "";
+	private String transantionId ="";
 	private MainSettingDialog mainSettingDialog;
 	final static Logger logger = Logger.getLogger(AutoRagtag.class);
 	
@@ -82,10 +82,12 @@ public class AutoRagtag {
 		if(selectedBrands ==null || selectedBrands.size() ==0){
 			return;
 		}
+		AutoRagtag.logger.info("Start1 ...");
 		this.ragCrawler = new RagtagCrawler();
+		AutoRagtag.logger.info("Start ...");
 		List<String> brandNames = selectedBrands.stream().map(x-> x.getBrandName()).collect(Collectors.toList());
 		// uncomment to test
-		ShareContext.setAddedLinkProducts(new ArrayList<>());
+//		ShareContext.setAddedLinkProducts(new ArrayList<>());
 		while (!isExit) {
 			List<ItemRagtag> allItemsRagtag = ragCrawler.getProductToAddCart(brandNames, this.transantionId);
 			if(allItemsRagtag!= null){
@@ -95,6 +97,8 @@ public class AutoRagtag {
 					mainSettingDialog.appendLog("Add products : "+itemRagtag.getProductCode());
 				}
 				mainSettingDialog.appendLog("COMPLETE STEP !!!");
+			}else{
+				mainSettingDialog.appendLog("FOUND 0 NEW PRODUCTS !");
 			}
 		}
 	}
@@ -115,7 +119,7 @@ public class AutoRagtag {
 		urlParameters.add(new BasicNameValuePair("favorite_product_id", ""));
 		urlParameters.add(new BasicNameValuePair("transactionid", itemRagtag.getTransactionid()));
 		
-		this.logger.info("Add product :" + itemRagtag.getProductCode());
+		AutoRagtag.logger.info("Add product :" + itemRagtag.getProductCode());
 		try {
 			post.setEntity(new UrlEncodedFormEntity(urlParameters));
 		} catch (UnsupportedEncodingException e1) {

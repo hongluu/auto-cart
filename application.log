@@ -115,3 +115,91 @@
 2017-03-18 12:26:32 INFO  AutoRagtag:116 - Add product :2100722177313
 2017-03-18 12:27:11 INFO  AutoRagtag:116 - Add product :2100722177337
 2017-03-18 12:28:33 INFO  BaseCrawler:36 - No products to add cart !
+2017-03-18 14:11:59 INFO  BaseCrawler:36 - No products to add cart !
+2017-03-18 14:12:04 INFO  BaseCrawler:36 - No products to add cart !
+2017-03-18 14:12:11 INFO  BaseCrawler:36 - No products to add cart !
+2017-03-18 14:12:19 INFO  BaseCrawler:36 - No products to add cart !
+2017-03-18 14:12:24 INFO  BaseCrawler:36 - No products to add cart !
+2017-03-18 14:12:37 INFO  BaseCrawler:36 - No products to add cart !
+2017-03-18 14:12:40 INFO  BaseCrawler:36 - No products to add cart !
+2017-03-18 14:12:44 INFO  BaseCrawler:36 - No products to add cart !
+2017-03-18 14:12:47 INFO  BaseCrawler:36 - No products to add cart !
+2017-03-18 14:14:22 INFO  BaseCrawler:39 - FOUNDED 7 NEW PRODUCTS
+2017-03-18 14:14:24 INFO  AutoRagtag:118 - Add product :2100915123585
+2017-03-18 14:14:26 INFO  AutoRagtag:118 - Add product :2100915123639
+2017-03-18 14:14:28 INFO  AutoRagtag:118 - Add product :2100915123608
+2017-03-18 14:14:31 INFO  AutoRagtag:118 - Add product :2100915123592
+2017-03-18 14:14:33 INFO  AutoRagtag:118 - Add product :2100915123646
+2017-03-18 14:14:37 INFO  AutoRagtag:118 - Add product :2100915123622
+2017-03-18 14:14:40 INFO  AutoRagtag:118 - Add product :2100915123615
+2017-03-18 14:48:43 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:48:52 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:48:52 INFO  BaseCrawler:42 - FOUND 1 NEW PRODUCTS
+2017-03-18 14:49:05 INFO  AutoRagtag:118 - Add product :2100330189623
+2017-03-18 14:49:08 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:12 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:12 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:12 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:23 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:23 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:23 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:26 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:26 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:26 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:32 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:32 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:32 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:35 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:35 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:35 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:39 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:39 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:39 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:42 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:42 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:42 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:47 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:47 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:47 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:53 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:53 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:53 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:55 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:55 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:55 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:49:58 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:49:58 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:49:58 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:05 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:05 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:05 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:11 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:11 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:11 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:17 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:17 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:17 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:20 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:20 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:20 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:25 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:25 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:25 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:28 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:28 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:28 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:31 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:31 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:31 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:37 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:37 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:37 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:40 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:40 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:40 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:43 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:43 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:43 INFO  BaseCrawler:34 - Start find link!
+2017-03-18 14:50:48 INFO  BaseCrawler:36 - End find link!
+2017-03-18 14:50:48 INFO  BaseCrawler:39 - No products to add cart !
+2017-03-18 14:50:48 INFO  BaseCrawler:34 - Start find link!

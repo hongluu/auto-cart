@@ -31,7 +31,10 @@ public class RagtagCrawler extends BaseCrawlerWithServer {
 
 	public List<ItemRagtag> getProductToAddCart(List<String> brandNames, String transantionId) {
 		List<ItemRagtag> output = new ArrayList<>();
+		RagtagCrawler.logger.info("Start find link!");
 		List<String> allLinks = this.getLinkProductBy(brandNames);
+		RagtagCrawler.logger.info("End find link!");
+		
 		if(allLinks ==null || allLinks.size() ==0){
 			RagtagCrawler.logger.info("No products to add cart !");
 			return null;
@@ -97,7 +100,7 @@ public class RagtagCrawler extends BaseCrawlerWithServer {
 				+ URLDecoder.decode(brandName);
 		driver.get(url);
 		if (offset == 0) {
-			int totalPage = Integer.parseInt(driver.findElement(By.xpath("//*[@id='title_area']/span")).getText());
+			int totalPage = Integer.parseInt(driver.findElement(By.xpath("//*[@id='title_area']/span")).getText().replaceAll("[^0-9]+", ""));
 			outputs.put(totalPage, new ArrayList<String>());
 		}
 
