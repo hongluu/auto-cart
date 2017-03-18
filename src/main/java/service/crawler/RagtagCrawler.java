@@ -36,7 +36,7 @@ public class RagtagCrawler extends BaseCrawlerWithServer {
 			RagtagCrawler.logger.info("No products to add cart !");
 			return null;
 		}
-		RagtagCrawler.logger.info("FOUNDED "+allLinks.size()+" NEW PRODUCTS");
+		RagtagCrawler.logger.info("FOUND "+allLinks.size()+" NEW PRODUCTS");
 		ExecutorService executor = Executors.newFixedThreadPool(50);
 		for (String link : allLinks) {
 			Runnable worker = new Runnable() {
