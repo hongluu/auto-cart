@@ -58,21 +58,25 @@ public class RagtagCrawler extends BaseCrawlerWithServer {
 	}
 
 	private List<String> getLinkProductBy(List<String> brandNames) {
-		List<String> output = new ArrayList<>();
-
 		List<String> currentLinks = new ArrayList<>();
+		List<String> output = new ArrayList<>();
+		
 		for (String brandName : brandNames) {
 			currentLinks.addAll(getLinkProductBy(brandName));
 		}
 		List<String> addedList = ShareContext.getAddedLinkProducts();
+		
+		
 		if (addedList == null) {
+			ShareContext.setAddedLinkProducts(currentLinks);
 			return null;
 		}
-		output = currentLinks.stream().filter(link -> !addedList.contains(link)).collect(Collectors.toList());
-		ShareContext.setAddedLinkProducts(currentLinks);
-
+		output= currentLinks.stream().filter(link -> !addedList.contains(link)).collect(Collectors.toList());
+		if(output != null && !output.isEmpty()){
+			ShareContext.setAddedLinkProducts(currentLinks);
+		}
 		return output;
-
+		
 	}
 
 	private List<String> getLinkProductBy(String brandName) {
