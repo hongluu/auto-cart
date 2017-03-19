@@ -101,7 +101,7 @@ public class RagtagCrawler extends BaseCrawlerWithServer {
 
 		WebDriver driver = this.getDriver();
 		String url = "http://www.ragtag.jp/products/search.php?limit=" + limit + "&o=" + offset + "&s2%5B%5D="
-				+ URLDecoder.decode(brandName);
+				+ brandName.replaceAll(" ", "+");
 		driver.get(url);
 		if (offset == 0) {
 			int totalPage = Integer.parseInt(driver.findElement(By.xpath("//*[@id='title_area']/span")).getText().replaceAll("[^0-9]+", ""));
