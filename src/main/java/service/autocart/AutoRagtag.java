@@ -63,6 +63,10 @@ public class AutoRagtag {
 			cookieBuilder.append(a.getName()+"="+a.getValue()+";");
 		 });
 		cookie= cookieBuilder.toString();
+		AutoRagtag.logger.info("=================TRANSACTIONID===================");
+		AutoRagtag.logger.info(transantionId);
+		AutoRagtag.logger.info("=================COOKIE===================");
+		AutoRagtag.logger.info(cookie);
 	}
 	public LinkedHashMap<String, ArrayList<Brand>> getAllBrandMap() {
 		try {
@@ -105,7 +109,7 @@ public class AutoRagtag {
 		
 		List<String> brandNames = selectedBrands.stream().map(x-> x.getBrandName()).collect(Collectors.toList());
 		// uncomment to test
-		//ShareContext.setAddedLinkProducts(new ArrayList<>());
+		ShareContext.setAddedLinkProducts(new ArrayList<>());
 		while (!isExit) {
 			mainSettingDialog.appendLog("Start find products");
 			List<ItemRagtag> allItemsRagtag = ragCrawler.getProductToAddCart(brandNames, this.transantionId);

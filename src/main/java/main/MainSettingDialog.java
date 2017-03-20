@@ -35,6 +35,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.apache.log4j.Logger;
+
 import entities.Brand;
 import service.autocart.AutoRagtag;
 
@@ -43,6 +45,7 @@ public class MainSettingDialog extends JFrame{
 	/**
 	 * 
 	 */
+	final static Logger logger = Logger.getLogger(MainSettingDialog.class);
 	private static final long serialVersionUID = 6445315957007559638L;
 	private JTextField textField;
 	private JList<String> alphaList;
@@ -60,7 +63,7 @@ public class MainSettingDialog extends JFrame{
 	
 	public MainSettingDialog(){
 		
-		
+		MainSettingDialog.logger.info("========================START==========================");
 		AutoRagtag auto = new AutoRagtag(this);
 		auto.setTransactionIdAndCookie();
 		
