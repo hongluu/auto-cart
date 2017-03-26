@@ -3,10 +3,13 @@ package service.autocart;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.swing.JTextArea;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -36,11 +39,12 @@ public class AutoRagtag {
 
 	private  String cookie = "";
 	private String transantionId ="";
-	private MainSettingDialog mainSettingDialog;
+	private JTextArea logArea;
 	final static Logger logger = Logger.getLogger(AutoRagtag.class);
 	
-	public AutoRagtag(MainSettingDialog mainSettingDialog) {
-		this.mainSettingDialog = mainSettingDialog;
+	
+	public AutoRagtag(JTextArea logArea) {
+		this.logArea = logArea;
 	}
 
 	public String getTransantionId() {
@@ -109,21 +113,21 @@ public class AutoRagtag {
 		
 		List<String> brandNames = selectedBrands.stream().map(x-> x.getBrandName()).collect(Collectors.toList());
 		// uncomment to test
-		ShareContext.setAddedLinkProducts(new ArrayList<>());
+//		ShareContext.setAddedLinkProducts(new ArrayList<>());
 		while (!isExit) {
-			mainSettingDialog.appendLog("Start find products");
+//			logArea.append("Start find products");
 			List<ItemRagtag> allItemsRagtag = ragCrawler.getProductToAddCart(brandNames, this.transantionId);
 			
 			
 			if(allItemsRagtag!= null){
-				mainSettingDialog.appendLog("Found " +allItemsRagtag.size()+ " products");
+				logArea.append(new Date()+": Found " +allItemsRagtag.size()+ " products");
 				for (ItemRagtag itemRagtag : allItemsRagtag) {
 					this.addCart(itemRagtag);
-					mainSettingDialog.appendLog("Add products : "+itemRagtag.getProductCode());
+					logArea.append(new Date()+": Add products : "+itemRagtag.getProductCode());
 				}
-				mainSettingDialog.appendLog("COMPLETE STEP !!!");
+				logArea.append("COMPLETE STEP !!!");
 			}else{
-				mainSettingDialog.appendLog("No news products !!!");
+//				logArea.append("No news products !!!");
 			}
 		}
 	}

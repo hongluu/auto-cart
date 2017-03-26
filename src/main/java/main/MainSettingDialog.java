@@ -9,10 +9,10 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -29,8 +29,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -51,55 +49,77 @@ public class MainSettingDialog extends JFrame{
 	private JList<String> alphaList;
 	private JTextArea logArea;
 	private boolean running = false;
+	private final static String newline = "\n";
 	int count = 0;
 //	AutoAddCart autoCart = new AutoAddCart(this);
 	public void appendLog(String text){
-		logArea.append(text);
+		this.logArea.append(text + newline);
 	}
 	
 	public void clear(){
-		logArea.setText("");
+		this.logArea.setText("");
 	}
 	
 	public MainSettingDialog(){
 		
 		MainSettingDialog.logger.info("========================START==========================");
-		AutoRagtag auto = new AutoRagtag(this);
+		this.setCommonInfo();
+		initLogAreaGroup();
+		initBtnSave();
+		JScrollPane sc = initBrandFillter();
+		AutoRagtag auto = new AutoRagtag(this.logArea);
+		final JPanel branPanel = initCompListBrand(sc, auto);
+		initBtnAdd(auto, branPanel);
 		auto.setTransactionIdAndCookie();
-		
-		setTitle("カートイン- Ragtag");
-		getContentPane().setLayout(null);
-		setResizable(false);
-		setIconImage(new ImageIcon("./icon.png").getImage());
-		
+	}
+
+	private JScrollPane initBrandFillter() {
 		final JLabel lblNewLabel = new JLabel("<html>ブランド<br>（複数選択可）");
 		lblNewLabel.setBounds(12, 10, 95, 33);
 		getContentPane().add(lblNewLabel);
 		JScrollPane sc = new JScrollPane();
 		sc.setBounds(119, 20, 150, 150);
 		getContentPane().add(sc);
-		final LinkedHashMap<String, ArrayList<Brand>> map = auto.getAllBrandMap();
-		alphaList = new JList(map.keySet().toArray());
-		sc.setViewportView(alphaList);
-		alphaList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		final JPanel branPanel = new JPanel();
-		branPanel.setBounds(326, 20, 331, 150);
-		branPanel.setLayout(new CardLayout());
+		return sc;
+	}
+
+	private void initLogAreaGroup() {
+		logArea = new JTextArea();
+		logArea.setRows(20);
+		logArea.setColumns(20);
 		
-		for (Entry<String, ArrayList<Brand>> entry: map.entrySet()){
-			branPanel.add(entry.getKey(), new BrandPane(entry.getKey(), entry.getValue()));
-		}
-//		((CardLayout)branPanel.getLayout()).show(branPanel, "");
-		alphaList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		logArea.setBorder(new LineBorder(Color.GRAY));
+		logArea.setEditable(false);
+		JScrollPane pane = new JScrollPane(logArea);
+		pane.setBounds(119, 253, 538, 202);
+		getContentPane().add(pane);
+		
+		JLabel lblLog = new JLabel("ログ");
+		lblLog.setBounds(12, 253, 95, 13);
+		getContentPane().add(lblLog);
+	}
+
+	private void initBtnSave() {
+		JButton btnSaveSetting = new JButton("設定保存");
+		btnSaveSetting.addActionListener(new ActionListener() {
 			
 			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				String alpha = (String)alphaList.getSelectedValue();
-				((CardLayout)branPanel.getLayout()).show(branPanel, alpha);
+			public void actionPerformed(ActionEvent e) {
+				Properties pros = new Properties();
+				try {
+					pros.store(new FileWriter(new File("./setting.properties")),"");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
-		
+		btnSaveSetting.setMargin(new Insets(0, 0, 0, 0));
+		btnSaveSetting.setBounds(431, 471, 112, 21);
+		getContentPane().add(btnSaveSetting);
+	}
+
+	private void initBtnAdd(AutoRagtag auto, final JPanel branPanel) {
 		getContentPane().add(branPanel);
 		final JButton btnNewButton = new JButton("実行");
 		btnNewButton.setMargin(new Insets(0, 0, 0, 0));
@@ -108,12 +128,12 @@ public class MainSettingDialog extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				if (running) return;
-//				running = true;
-				SwingUtilities.invokeLater(new Runnable() {
+				  new Thread(new Runnable() {
 					
+					@SuppressWarnings("unchecked")
 					@Override
 					public void run() {
+						logArea.append("Start at : "+ new Date() + "..." + newline);
 						List<String> alphas = (ArrayList<String>)alphaList.getSelectedValuesList();
 						if (alphas == null || alphas.isEmpty()){
 							JOptionPane.showMessageDialog(null, "ブランドの接頭辞を選択してください。!");
@@ -139,6 +159,15 @@ public class MainSettingDialog extends JFrame{
 
 						btnNewButton.setText("実行中...");
 						btnNewButton.setEnabled(false);
+						
+						String brandString = getListBrandConfirm(selectedBrands);
+						int ret = JOptionPane.showConfirmDialog(null, brandString);
+						if (ret == JOptionPane.OK_OPTION){
+							auto.run(selectedBrands);
+						}
+					}
+
+					private String getListBrandConfirm(ArrayList<Brand> selectedBrands) {
 						String brandString = "<html>このブランドの新規出品商品をカートに入れる。<br>";
 						int ii = 0;
 						for (Brand brand: selectedBrands){
@@ -148,68 +177,56 @@ public class MainSettingDialog extends JFrame{
 							}
 							brandString += "・" + brand.toString();
 						}
-						int ret = JOptionPane.showConfirmDialog(null, brandString);
-						if (ret == JOptionPane.OK_OPTION){
-							new javax.swing.Timer(1, new ActionListener() {
-								int i=0;
-								@Override
-								public void actionPerformed(ActionEvent e) {
-								logArea.append("\nNo." + (i++) + ": ");
-								auto.run(selectedBrands);
-								}
-							}).start();
-						}
+						return brandString;
 					}
-				});
+				}).start();
 				
 			}
 		});
 		getContentPane().add(btnNewButton);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private JPanel initCompListBrand(JScrollPane sc, AutoRagtag auto) {
+		final LinkedHashMap<String, ArrayList<Brand>> map = auto.getAllBrandMap();
+		alphaList = new JList(map.keySet().toArray());
+		sc.setViewportView(alphaList);
+		alphaList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		final JPanel branPanel = new JPanel();
+		branPanel.setBounds(326, 20, 331, 150);
+		branPanel.setLayout(new CardLayout());
 		
-		logArea = new JTextArea();
-		logArea.setRows(20);
-		logArea.setColumns(20);
-		
-		logArea.setBorder(new LineBorder(Color.GRAY));
-		logArea.setEditable(false);
-		JScrollPane pane = new JScrollPane(logArea);
-		pane.setBounds(119, 253, 538, 202);
-		getContentPane().add(pane);
-		
-		JLabel lblLog = new JLabel("ログ");
-		lblLog.setBounds(12, 253, 95, 13);
-		getContentPane().add(lblLog);
-		
-		JButton btnSaveSetting = new JButton("設定保存");
-		btnSaveSetting.addActionListener(new ActionListener() {
+		for (Entry<String, ArrayList<Brand>> entry: map.entrySet()){
+			branPanel.add(entry.getKey(), new BrandPane(entry.getKey(), entry.getValue()));
+		}
+//		((CardLayout)branPanel.getLayout()).show(branPanel, "");
+		alphaList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				Properties pros = new Properties();
-				try {
-					pros.store(new FileWriter(new File("./setting.properties")),"");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				String alpha = (String)alphaList.getSelectedValue();
+				((CardLayout)branPanel.getLayout()).show(branPanel, alpha);
 			}
 		});
-		btnSaveSetting.setMargin(new Insets(0, 0, 0, 0));
-		btnSaveSetting.setBounds(431, 471, 112, 21);
-		getContentPane().add(btnSaveSetting);
-		
-		
+		return branPanel;
+	}
+
+	private void setCommonInfo() {
+		setTitle("カートイン- Ragtag");
+		getContentPane().setLayout(null);
+		setResizable(false);
+		setIconImage(new ImageIcon("./icon.png").getImage());
 		JLabel label = new JLabel("    >>");
 		label.setBounds(274, 87, 50, 13);
 		getContentPane().add(label);
-		
-
 		setSize(685, 550);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
 	private class BrandPane extends JScrollPane{
-		JList list;
+		private static final long serialVersionUID = 1544659109150079417L;
+		JList<?> list;
 		public BrandPane(String name, ArrayList<Brand> brandList){
 			list = new JList<>(brandList.toArray());
 			list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -217,7 +234,7 @@ public class MainSettingDialog extends JFrame{
 			setName(name);
 		}
 		
-		public List getSelectedBrands(){
+		public List<?> getSelectedBrands(){
 			return list.getSelectedValuesList();
 		}
 	}
